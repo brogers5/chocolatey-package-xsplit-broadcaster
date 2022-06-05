@@ -1,0 +1,43 @@
+Import-Module au
+
+function global:au_BeforeUpdate ($Package)  {
+    #Avoid executing chocolateyInstall.ps1 to accommodate build environments incompatible with software
+    $Latest.Checksum64 = Get-RemoteChecksum $Latest.URL64
+
+    Set-DescriptionFromReadme -Package $Package -ReadmePath ".\DESCRIPTION.md"
+}
+
+function global:au_AfterUpdate ($Package) {
+
+}
+
+function global:au_SearchReplace {
+    @{
+        'tools\chocolateyInstall.ps1' = @{
+            "(^[$]softwareVersion\s*=\s*)'.*'"  = "`$1'$($Latest.Version)'"
+            "(^[$]?\s*url64bit\s*=\s*)('.*')"   = "`$1'$($Latest.URL64)'"
+            "(^[$]?\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
+        }
+        "$($Latest.PackageName).nuspec" = @{
+            "(\<releaseNotes\>).*?(\</releaseNotes\>)" = "`${1}$($Latest.ReleaseNotes)`$2"
+        }
+    }
+}
+
+function global:au_GetLatest {
+    $uri = 'https://www.xsplit.com/api/service/download?page_size=10&application_id=1&active=1&release=0&platform=windows&installer_type=exe'
+    $userAgent = "Update checker of Chocolatey Community Package 'xsplit-broadcaster'"
+
+    $response = Invoke-RestMethod -Uri $uri -UserAgent $userAgent -UseBasicParsing
+
+    $releaseData = $response.data[0]
+    $version = $releaseData.version
+
+    return @{
+        URL64 = "https://cdn2.xsplit.com/download/bc/m46/$version/XSplit_Broadcaster_$version.exe"
+        Version = $version
+        ReleaseNotes = $releaseData.release_notes_url
+    }
+}
+
+Update-Package -ChecksumFor None -NoReadme

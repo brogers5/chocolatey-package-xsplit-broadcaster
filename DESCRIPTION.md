@@ -1,23 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
-<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
-  <metadata>
-    <id>xsplit-broadcaster</id>
-    <version>4.3.2202.1228</version>
-    <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.3.2202.1228</packageSourceUrl>
-    <owners>sublym0nal</owners>
-    <title>XSplit Broadcaster</title>
-    <authors>SplitmediaLabs, Ltd.</authors>
-    <projectUrl>https://www.xsplit.com/broadcaster</projectUrl>
-    <iconUrl>https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png</iconUrl>
-    <copyright>© 2022 SplitmediaLabs, Ltd. All Rights Reserved.</copyright>
-    <licenseUrl>https://www.xsplit.com/terms-and-conditions</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <docsUrl>https://www.xsplit.com/support/broadcaster</docsUrl>
-    <mailingListUrl>https://community.xsplit.com/c/broadcaster/6</mailingListUrl>
-    <tags>xsplit broadcaster live stream livestream live-stream youtube twitch facebook younow restream niconico streamshark rtmp recording 64-bit freemium</tags>
-    <summary>Live Streaming &amp; Recording Studio</summary>
-    <description><![CDATA[
+
 ---
 
 ### [choco://xsplit-broadcaster](choco://xsplit-broadcaster)
@@ -88,13 +69,3 @@ For future upgrade operations, consider opting into Chocolatey's `useRememberedA
 ```
 choco feature enable -n=useRememberedArgumentsForUpgrades
 ```
-]]></description>
-    <releaseNotes>https://docs.google.com/document/d/e/2PACX-1vREPmEtmiwXg_Z9N3zSvBU_VhYaw9oM-FHvZduXV_asztylmmC9kZvNQ-2YlssBLlSalG33r3q14nAs/pub</releaseNotes>
-    <dependencies>
-      <dependency id="chocolatey-os-dependency.extension" version="0.0.1" />
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="tools\**" target="tools" />
-  </files>
-</package>
