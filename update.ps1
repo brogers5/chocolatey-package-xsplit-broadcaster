@@ -35,9 +35,12 @@ function global:au_GetLatest {
 
     $releaseData = $response.data[0]
     $version = $releaseData.version
+    $downloadUri = ([System.Uri] $releaseData.download_url)
+    $uriSegments = $downloadUri.Segments
+    $downloadUrlDirectory = $downloadUri.AbsoluteUri.TrimEnd($uriSegments[$uriSegments.Length - 1])
 
     return @{
-        URL64 = "https://cdn2.xsplit.com/download/bc/m46/$version/XSplit_Broadcaster_$version.exe"
+        URL64 = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
         Version = $version
         ReleaseNotes = $releaseData.release_notes_url
     }
