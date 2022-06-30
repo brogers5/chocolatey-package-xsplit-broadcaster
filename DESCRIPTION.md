@@ -16,6 +16,12 @@ XSplit Broadcaster, the best all-in-one streaming and recording application for 
 
 ## Package Notes
 
+This package depends on downloading from XSplit's official distribution point. Therefore, supportability should be expected to follow [XSplit's support policy](https://www.xsplit.com/blog/xsplit-version-updates). Notably, once a given version is no longer supported, availabilty of the installer binary cannot be guaranteed. Consequently, this package version should generally be considered obsolete and unsupported once the consumed software version reaches end-of-support.
+
+Consider [internalizing this package](https://docs.chocolatey.org/en-us/guides/create/recompile-packages) if you require the ability to install this specific version after it reaches end-of-support.
+
+---
+
 The installer executed by this package was built using Advanced Installer. For advanced setup scenarios, refer to [Advanced Installer's documentation for command-line switches](https://www.advancedinstaller.com/user-guide/exe-setup-file.html).
 
 For your convenience, the bootstrapper-specific details are included below:
