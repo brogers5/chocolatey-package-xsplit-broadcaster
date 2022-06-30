@@ -1,8 +1,10 @@
 Import-Module au
 
 function global:au_BeforeUpdate ($Package)  {
-    #Avoid executing chocolateyInstall.ps1 to accommodate build environments incompatible with software
-    $Latest.Checksum64 = Get-RemoteChecksum $Latest.URL64
+    #Archive this version for future development, since the vendor does not guarantee perpetual availability
+    $filePath = ".\XSplit_Broadcaster_$($Latest.Version).exe"
+    Invoke-WebRequest -Uri $Latest.URL64 -OutFile $filePath
+    $Latest.Checksum64 = (Get-FileHash -Path $filePath -Algorithm SHA256).Hash.ToLower()
 
     Set-DescriptionFromReadme -Package $Package -ReadmePath ".\DESCRIPTION.md"
 }
