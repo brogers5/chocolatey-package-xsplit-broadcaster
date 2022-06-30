@@ -44,7 +44,7 @@ For your convenience, the bootstrapper-specific details are included below:
 
 * Prerequisites:
 
-    N/A
+    * `.NET Framework 4.8` (declared as package dependency)
 
 Notable Windows Installer properties include:
 * `AI_DESKTOP_SH` - Add shortcut(s) to the Desktop. Defaults to `1`, disable with `0`.

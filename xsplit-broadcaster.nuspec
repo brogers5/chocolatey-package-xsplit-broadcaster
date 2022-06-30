@@ -92,6 +92,7 @@ choco feature enable -n=useRememberedArgumentsForUpgrades
     <releaseNotes>https://docs.google.com/document/d/e/2PACX-1vREPmEtmiwXg_Z9N3zSvBU_VhYaw9oM-FHvZduXV_asztylmmC9kZvNQ-2YlssBLlSalG33r3q14nAs/pub</releaseNotes>
     <dependencies>
       <dependency id="chocolatey-os-dependency.extension" version="0.0.1" />
+      <dependency id="dotnetfx" version="4.8.0.0" />
     </dependencies>
   </metadata>
   <files>
