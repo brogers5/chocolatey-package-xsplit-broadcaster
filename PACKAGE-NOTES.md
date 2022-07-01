@@ -14,17 +14,17 @@ For your convenience, the bootstrapper-specific details are included below:
 
     |lang_id|Language Name|
     |-|-|
-    |1033|English (United States)|
     |1028|Chinese (Traditional, Taiwan)|
-    |2052|Chinese (Simplified, China)|
     |1031|German (Germany)|
+    |1033|English (United States)|
     |1036|French (France)|
     |1041|Japanese (Japan)|
     |1042|Korean (Korea)|
     |1046|Portuguese (Brazil)|
     |1049|Russian (Russia)|
-    |3082|Spanish (Spain, International Sort)|
     |1054|Thai (Thailand)|
+    |2052|Chinese (Simplified, China)|
+    |3082|Spanish (Spain, International Sort)|
 
 * Prerequisites:
 
