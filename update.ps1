@@ -29,6 +29,7 @@ function global:au_SearchReplace {
             "(^[$]?\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
         }
         "$($Latest.PackageName).nuspec" = @{
+            "<packageSourceUrl>[^<]*</packageSourceUrl>" = "<packageSourceUrl>https://github.com/brogers5/chocolatey-package-$($Latest.PackageName)/tree/v$($Latest.Version)</packageSourceUrl>"
             "(\<releaseNotes\>).*?(\</releaseNotes\>)" = "`${1}$($Latest.ReleaseNotes)`$2"
             "<copyright>[^<]*</copyright>" = "<copyright>© $(Get-Date -Format yyyy) SplitmediaLabs, Ltd. All Rights Reserved.</copyright>"
         }
