@@ -6,7 +6,15 @@ function global:au_BeforeUpdate ($Package)  {
     Invoke-WebRequest -Uri $Latest.URL64 -OutFile $filePath
     $Latest.Checksum64 = (Get-FileHash -Path $filePath -Algorithm SHA256).Hash.ToLower()
 
-    Set-DescriptionFromReadme -Package $Package -ReadmePath ".\DESCRIPTION.md"
+    $readmePath = ".\DESCRIPTION.md"
+    $readmeContents = Get-Content $readmePath -Encoding UTF8
+    $readmeContents = $readmeContents -replace "/tree/v.*\/", "/tree/v$($Latest.Version)/"
+
+    $encoding = New-Object System.Text.UTF8Encoding($false)
+    $output = $readmeContents | Out-String
+    [System.IO.File]::WriteAllText((Get-Item $readmePath).FullName, $output, $encoding)
+
+    Set-DescriptionFromReadme -Package $Package -ReadmePath $readmePath
 }
 
 function global:au_AfterUpdate ($Package) {
