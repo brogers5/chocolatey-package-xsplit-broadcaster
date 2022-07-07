@@ -7,7 +7,7 @@
     <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.4.2206.2901</packageSourceUrl>
     <owners>sublym0nal</owners>
     <title>XSplit Broadcaster</title>
-    <authors>SplitmediaLabs, Ltd.</authors>
+    <authors>SplitmediaLabs Ltd.</authors>
     <projectUrl>https://www.xsplit.com/broadcaster</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png</iconUrl>
     <copyright>© 2022 SplitmediaLabs, Ltd. All Rights Reserved.</copyright>
