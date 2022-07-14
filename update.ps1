@@ -8,7 +8,7 @@ function global:au_BeforeUpdate ($Package)  {
 
     $readmePath = ".\DESCRIPTION.md"
     $readmeContents = Get-Content $readmePath -Encoding UTF8
-    $readmeContents = $readmeContents -replace "/tree/v.*\/", "/tree/v$($Latest.Version)/"
+    $readmeContents = $readmeContents -replace "/blob/v.*\/", "/blob/v$($Latest.Version)/"
 
     $encoding = New-Object System.Text.UTF8Encoding($false)
     $output = $readmeContents | Out-String
