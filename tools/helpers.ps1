@@ -5,10 +5,10 @@
         [string] $version
     )
 
-    [array] $key = Get-UninstallRegistryKey -SoftwareName $softwareName
-    if ($key.Length -ge 1)
+    [array] $keys = Get-UninstallRegistryKey -SoftwareName 'XSplit Broadcaster'
+    if ($keys.Length -ge 1)
     {
-        return $key.Version -eq $version
+        return $keys[0].DisplayVersion -ne $version
     }
   
     return $true
