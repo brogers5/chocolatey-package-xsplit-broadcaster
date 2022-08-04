@@ -38,6 +38,7 @@ XSplit Broadcaster, the best all-in-one streaming and recording application for 
     <releaseNotes>https://docs.google.com/document/d/e/2PACX-1vRPuL3aUujDgwfiXIlJiATltMwpr87a3QvY16K9beSLtbSOd0nxBmvkhpENKJRjttRskciUN96ovPh8/pub</releaseNotes>
     <dependencies>
       <dependency id="chocolatey-os-dependency.extension" version="0.0.1" />
+      <dependency id="chocolatey-fastanswers.extension" version="0.0.1" />
       <dependency id="dotnetfx" version="4.8.0.0" />
     </dependencies>
   </metadata>

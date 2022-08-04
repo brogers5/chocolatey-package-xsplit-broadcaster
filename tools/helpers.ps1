@@ -13,8 +13,3 @@
   
     return $true
 }
-
-function Get-RebootPending()
-{
-    return Test-Path -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending'
-}

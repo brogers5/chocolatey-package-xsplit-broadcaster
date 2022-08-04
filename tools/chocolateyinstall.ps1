@@ -16,7 +16,7 @@ if (!$shouldInstall -and !$env:ChocolateyForce)
 }
 else
 {
-  if (Get-RebootPending)
+  if (Get-PendingReboot)
   {
     Write-Warning "A pending system reboot request has been detected. If this
          request originated from installing .NET Framework 4.8,
