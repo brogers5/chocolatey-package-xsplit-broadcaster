@@ -14,4 +14,4 @@ XSplit Broadcaster, the best all-in-one streaming and recording application for 
 
 ---
 
-## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.4.2208.1904/PACKAGE-NOTES.md)
+## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.4.2209.2103/PACKAGE-NOTES.md)
