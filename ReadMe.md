@@ -1,9 +1,12 @@
 ﻿# <img src="https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png" width="48" height="48"/> Chocolatey Package: [XSplit Broadcaster](https://community.chocolatey.org/packages/xsplit-broadcaster/)
+
 [![Chocolatey package version](https://img.shields.io/chocolatey/v/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster/)
 [![Chocolatey package download count](https://img.shields.io/chocolatey/dt/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster/)
 
 ## Install
+
 [Install Chocolatey](https://chocolatey.org/install), and run the following command to install the latest approved version on the Chocolatey Community Repository:
+
 ```shell
 choco install xsplit-broadcaster
 ```
@@ -15,7 +18,9 @@ choco install xsplit-broadcaster --source="'.;https://community.chocolatey.org/a
 ```
 
 ## Build
+
 [Install Chocolatey](https://chocolatey.org/install), clone this repository, and run the following command in the cloned repository:
+
 ```shell
 choco pack
 ```
@@ -25,14 +30,17 @@ A successful build will create `xsplit-broadcaster.w.x.y.z.nupkg`, where `w.x.y.
 Note that Chocolatey package builds are non-deterministic. Consequently, an independently built package will fail a checksum validation against officially published packages.
 
 ## Update
+
 This package should be automatically updated by the [Chocolatey Automatic Package Updater Module](https://github.com/majkinetor/au). If it is outdated by more than a few days, please [open an issue](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/issues).
 
 AU expects the parent directory that contains this repository to share a name with the Nuspec (`xsplit-broadcaster`). Your local repository should therefore be cloned accordingly:
+
 ```shell
 git clone git@github.com:brogers5/chocolatey-package-xsplit-broadcaster.git xsplit-broadcaster
 ```
 
 Alternatively, a junction point can be created that points to the local repository (preferably within a repository adopting the [AU packages template](https://github.com/majkinetor/au-packages-template)):
+
 ```shell
 mklink /J xsplit-broadcaster ..\chocolatey-package-xsplit-broadcaster
 ```
