@@ -1,14 +1,14 @@
-﻿# <img src="https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png" width="48" height="48"/> Chocolatey Package: [XSplit Broadcaster](https://community.chocolatey.org/packages/xsplit-broadcaster/)
+﻿# <img src="https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png" width="48" height="48"/> Chocolatey Package: [XSplit Broadcaster](https://community.chocolatey.org/packages/xsplit-broadcaster)
 
-[![Chocolatey package version](https://img.shields.io/chocolatey/v/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster/)
-[![Chocolatey package download count](https://img.shields.io/chocolatey/dt/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster/)
+[![Chocolatey package version](https://img.shields.io/chocolatey/v/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster)
+[![Chocolatey package download count](https://img.shields.io/chocolatey/dt/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster)
 
 ## Install
 
-[Install Chocolatey](https://chocolatey.org/install), and run the following command to install the latest approved version on the Chocolatey Community Repository:
+[Install Chocolatey](https://chocolatey.org/install), and run the following command to install the latest approved stable version from the Chocolatey Community Repository:
 
 ```shell
-choco install xsplit-broadcaster
+choco install xsplit-broadcaster --source="'https://community.chocolatey.org/api/v2'"
 ```
 
 Alternatively, the packages as published on the Chocolatey Community Repository will also be mirrored on this repository's [Releases page](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/releases). The `nupkg` can be installed from the current directory (with dependencies sourced from the Community Repository) as follows:
