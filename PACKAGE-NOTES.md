@@ -56,6 +56,7 @@ choco install xsplit-broadcaster --install-arguments "AI_DESKTOP_SH=0 AI_QUICKLA
 ---
 
 For future upgrade operations, consider opting into Chocolatey's `useRememberedArgumentsForUpgrades` feature to avoid having to pass the same arguments with each upgrade:
-```
-choco feature enable --name=useRememberedArgumentsForUpgrades
+
+```shell
+choco feature enable --name="'useRememberedArgumentsForUpgrades'"
 ```
