@@ -44,9 +44,13 @@ function global:au_GetLatest {
 
     $releaseData = $response.data[0]
     $version = $releaseData.version
-    $downloadUri = ([System.Uri] $releaseData.download_url)
-    $uriSegments = $downloadUri.Segments
-    $downloadUrlDirectory = $downloadUri.AbsoluteUri.TrimEnd($uriSegments[$uriSegments.Length - 1])
+
+    #The package uses the offline installer, but SplitMediaLabs only publishes the web installer's URI.
+    #This is only publicly shared via the web installer, and exposed as an alternate location in the installer.
+    #We may need to cross-check against it or probe the server every now and then to keep up with changes.
+    $webInstallerUri = ([System.Uri] $releaseData.download_url)
+    $webInstallerUriSegments = $webInstallerUri.Segments
+    $downloadUrlDirectory = $webInstallerUri.AbsoluteUri.TrimEnd($webInstallerUriSegments[$webInstallerUriSegments.Length - 1])
 
     return @{
         URL64 = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
