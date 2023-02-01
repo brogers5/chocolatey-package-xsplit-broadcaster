@@ -36,13 +36,17 @@ function global:au_SearchReplace {
     }
 }
 
-function global:au_GetLatest {
+function Get-LatestReleaseData {
     $uri = 'https://www.xsplit.com/api/service/download?page_size=10&application_id=1&active=1&release=0&platform=windows&installer_type=exe'
     $userAgent = "Update checker of Chocolatey Community Package 'xsplit-broadcaster'"
 
     $response = Invoke-RestMethod -Uri $uri -UserAgent $userAgent -UseBasicParsing
 
-    $releaseData = $response.data[0]
+    return $response.data[0]
+}
+
+function global:au_GetLatest {
+    $releaseData = Get-LatestReleaseData
     $version = $releaseData.version
 
     #The package uses the offline installer, but SplitMediaLabs only publishes the web installer's URI.
@@ -59,4 +63,21 @@ function global:au_GetLatest {
     }
 }
 
-Update-Package -ChecksumFor None -NoReadme
+$releaseData = Get-LatestReleaseData
+$latestPublishedVersion = $releaseData.Version
+
+$currentPath = (Split-Path $MyInvocation.MyCommand.Definition)
+$installScriptPath = Join-Path -Path $currentPath -ChildPath 'tools' | Join-Path -ChildPath 'chocolateyInstall.ps1'
+$localVersion = (Select-String -Path $installScriptPath -Pattern "(^[$]softwareVersion\s*=\s*)'(.*)'").Matches.Groups[2].Value
+
+if ($latestPublishedVersion -lt $localVersion)
+{
+    Write-Warning "Local version (v$localVersion) is newer than latest published version (v$latestPublishedVersion)"
+    Write-Warning "v$localVersion may have been unlisted - skipping URL check due to avoid directory-related errors"
+
+    Update-Package -ChecksumFor None -NoReadme -NoCheckUrl
+}
+else
+{
+    Update-Package -ChecksumFor None -NoReadme
+}
