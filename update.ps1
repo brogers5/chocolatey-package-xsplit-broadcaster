@@ -1,6 +1,6 @@
 Import-Module au
 
-function global:au_BeforeUpdate ($Package)  {
+function global:au_BeforeUpdate ($Package) {
     #Archive this version for future development, since the vendor does not guarantee perpetual availability
     $filePath = ".\XSplit_Broadcaster_$($Latest.Version).exe"
     Invoke-WebRequest -Uri $Latest.URL64 -OutFile $filePath
@@ -23,15 +23,15 @@ function global:au_AfterUpdate ($Package) {
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1' = @{
+        'tools\chocolateyInstall.ps1'   = @{
             "(^[$]softwareVersion\s*=\s*)'.*'"  = "`$1'$($Latest.Version)'"
             "(^[$]?\s*url64bit\s*=\s*)('.*')"   = "`$1'$($Latest.URL64)'"
             "(^[$]?\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
         }
         "$($Latest.PackageName).nuspec" = @{
             "(<packageSourceUrl>)[^<]*(</packageSourceUrl>)" = "`$1https://github.com/brogers5/chocolatey-package-$($Latest.PackageName)/tree/v$($Latest.Version)`$2"
-            "(\<releaseNotes\>).*?(\</releaseNotes\>)" = "`${1}$($Latest.ReleaseNotes)`$2"
-            "(<copyright>)[^<]*(</copyright>)" = "`$1© $(Get-Date -Format yyyy) SplitmediaLabs, Ltd. All Rights Reserved.`$2"
+            "(\<releaseNotes\>).*?(\</releaseNotes\>)"       = "`${1}$($Latest.ReleaseNotes)`$2"
+            "(<copyright>)[^<]*(</copyright>)"               = "`$1© $(Get-Date -Format yyyy) SplitmediaLabs, Ltd. All Rights Reserved.`$2"
         }
     }
 }
@@ -57,8 +57,8 @@ function global:au_GetLatest {
     $downloadUrlDirectory = $webInstallerUri.AbsoluteUri.TrimEnd($webInstallerUriSegments[$webInstallerUriSegments.Length - 1])
 
     return @{
-        URL64 = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
-        Version = $version
+        URL64        = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
+        Version      = $version
         ReleaseNotes = $releaseData.release_notes_url
     }
 }
@@ -70,14 +70,12 @@ $currentPath = (Split-Path $MyInvocation.MyCommand.Definition)
 $installScriptPath = Join-Path -Path $currentPath -ChildPath 'tools' | Join-Path -ChildPath 'chocolateyInstall.ps1'
 $localVersion = (Select-String -Path $installScriptPath -Pattern "(^[$]softwareVersion\s*=\s*)'(.*)'").Matches.Groups[2].Value
 
-if ($latestPublishedVersion -lt $localVersion)
-{
+if ($latestPublishedVersion -lt $localVersion) {
     Write-Warning "Local version (v$localVersion) is newer than latest published version (v$latestPublishedVersion)"
     Write-Warning "v$localVersion may have been unlisted - skipping URL check due to avoid directory-related errors"
 
     Update-Package -ChecksumFor None -NoReadme -NoCheckUrl
 }
-else
-{
+else {
     Update-Package -ChecksumFor None -NoReadme
 }

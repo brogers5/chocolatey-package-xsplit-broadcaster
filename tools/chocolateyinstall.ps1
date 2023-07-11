@@ -9,15 +9,12 @@ $softwareName = 'XSplit Broadcaster'
 $softwareVersion = '4.4.2304.1203'
 $shouldInstall = Get-ShouldInstall -Version $softwareVersion
 
-if (!$shouldInstall -and !$env:ChocolateyForce)
-{
+if (!$shouldInstall -and !$env:ChocolateyForce) {
   Write-Output "$softwareName v$softwareVersion is already installed."
   Write-Output "Skipping download and execution of installer."
 }
-else
-{
-  if (Get-PendingReboot)
-  {
+else {
+  if (Get-PendingReboot) {
     Write-Warning "A pending system reboot request has been detected. If this
          request originated from installing .NET Framework 4.8,
          $softwareName may fail to install."
