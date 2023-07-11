@@ -24,7 +24,7 @@ function global:au_AfterUpdate ($Package) {
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
-            "(^[$]softwareVersion\s*=\s*)'.*'"  = "`$1'$($Latest.Version)'"
+            "(^[$]softwareVersion\s*=\s*)'.*'"  = "`$1'$($Latest.SoftwareVersion)'"
             "(^[$]?\s*url64bit\s*=\s*)('.*')"   = "`$1'$($Latest.URL64)'"
             "(^[$]?\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
         }
@@ -57,9 +57,10 @@ function global:au_GetLatest {
     $downloadUrlDirectory = $webInstallerUri.AbsoluteUri.TrimEnd($webInstallerUriSegments[$webInstallerUriSegments.Length - 1])
 
     return @{
-        URL64        = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
-        Version      = $version
-        ReleaseNotes = $releaseData.release_notes_url
+        ReleaseNotes    = $releaseData.release_notes_url
+        SoftwareVersion = $version
+        URL64           = "$($downloadUrlDirectory)XSplit_Broadcaster_$version.exe"
+        Version         = $version #This may change if building a package fix version
     }
 }
 
