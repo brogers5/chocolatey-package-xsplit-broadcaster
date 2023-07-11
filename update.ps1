@@ -1,3 +1,5 @@
+[CmdletBinding()]
+param($IncludeStream)
 Import-Module au
 
 $userAgent = "Update checker of Chocolatey Community Package 'xsplit-broadcaster'"
@@ -144,8 +146,8 @@ if ($latestPublishedVersion -lt $localVersion) {
     Write-Warning "Local version (v$localVersion) is newer than latest published version (v$latestPublishedVersion)"
     Write-Warning "v$localVersion may have been unlisted - skipping URL check due to avoid directory-related errors"
 
-    Update-Package -ChecksumFor None -NoReadme -NoCheckUrl
+    Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme -NoCheckUrl
 }
 else {
-    Update-Package -ChecksumFor None -NoReadme
+    Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme
 }
