@@ -111,7 +111,7 @@ function global:au_GetLatest {
         Stable = Get-LatestPublicReleaseInfo
     }
 
-    $m = 43;
+    $m = 47;
     while ($true) {
         $keyName = "m$m"
         try {
