@@ -6,10 +6,10 @@ $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 . $toolsDir\helpers.ps1
 
 $softwareName = 'XSplit Broadcaster'
-$softwareVersion = '4.4.2304.1203'
-$shouldInstall = Get-ShouldInstall -Version $softwareVersion
+[version] $softwareVersion = '4.4.2304.1203'
+$currentVersion = Get-CurrentVersion
 
-if (!$shouldInstall -and !$env:ChocolateyForce) {
+if ($currentVersion -and $currentVersion -eq $softwareVersion -and !$env:ChocolateyForce) {
   Write-Output "$softwareName v$softwareVersion is already installed."
   Write-Output "Skipping download and execution of installer."
 }

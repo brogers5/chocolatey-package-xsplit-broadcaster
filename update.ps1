@@ -26,9 +26,9 @@ function global:au_AfterUpdate ($Package) {
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
-            "(^[$]softwareVersion\s*=\s*)'.*'"  = "`$1'$($Latest.SoftwareVersion)'"
-            "(^[$]?\s*url64bit\s*=\s*)('.*')"   = "`$1'$($Latest.URL64)'"
-            "(^[$]?\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
+            '(^\[version\] [$]softwareVersion\s*=\s*)(''.*'')' = "`$1'$($Latest.SoftwareVersion)'"
+            "(^[$]?\s*url64bit\s*=\s*)('.*')"                  = "`$1'$($Latest.URL64)'"
+            "(^[$]?\s*checksum64\s*=\s*)('.*')"                = "`$1'$($Latest.Checksum64)'"
         }
         "$($Latest.PackageName).nuspec" = @{
             "(<packageSourceUrl>)[^<]*(</packageSourceUrl>)" = "`$1https://github.com/brogers5/chocolatey-package-$($Latest.PackageName)/tree/v$($Latest.Version)`$2"
@@ -138,7 +138,7 @@ $latestPublishedVersion = $releaseData.Version
 
 $currentPath = (Split-Path $MyInvocation.MyCommand.Definition)
 $installScriptPath = Join-Path -Path $currentPath -ChildPath 'tools' | Join-Path -ChildPath 'chocolateyInstall.ps1'
-$localVersion = (Select-String -Path $installScriptPath -Pattern "(^[$]softwareVersion\s*=\s*)'(.*)'").Matches.Groups[2].Value
+$localVersion = (Select-String -Path $installScriptPath -Pattern "(^^\[version\] [$]softwareVersion\s*=\s*)'(.*)'").Matches.Groups[2].Value
 
 if ($latestPublishedVersion -lt $localVersion) {
     Write-Warning "Local version (v$localVersion) is newer than latest published version (v$latestPublishedVersion)"
