@@ -10,9 +10,9 @@ function global:au_BeforeUpdate ($Package) {
     Invoke-WebRequest -Uri $Latest.URL64 -OutFile $filePath
     $Latest.Checksum64 = (Get-FileHash -Path $filePath -Algorithm SHA256).Hash.ToLower()
 
-    $readmePath = ".\DESCRIPTION.md"
+    $readmePath = '.\DESCRIPTION.md'
     $readmeContents = Get-Content $readmePath -Encoding UTF8
-    $readmeContents = $readmeContents -replace "/blob/v.*\/", "/blob/v$($Latest.Version)/"
+    $readmeContents = $readmeContents -replace '/blob/v.*\/', "/blob/v$($Latest.Version)/"
 
     $encoding = New-Object System.Text.UTF8Encoding($false)
     $output = $readmeContents | Out-String
@@ -33,9 +33,9 @@ function global:au_SearchReplace {
             "(^[$]?\s*checksum64\s*=\s*)('.*')"                = "`$1'$($Latest.Checksum64)'"
         }
         "$($Latest.PackageName).nuspec" = @{
-            "(<packageSourceUrl>)[^<]*(</packageSourceUrl>)" = "`$1https://github.com/brogers5/chocolatey-package-$($Latest.PackageName)/tree/v$($Latest.Version)`$2"
-            "(\<releaseNotes\>).*?(\</releaseNotes\>)"       = "`${1}$($Latest.ReleaseNotes)`$2"
-            "(<copyright>)[^<]*(</copyright>)"               = "`$1© $(Get-Date -Format yyyy) SplitmediaLabs, Ltd. All Rights Reserved.`$2"
+            '(<packageSourceUrl>)[^<]*(</packageSourceUrl>)' = "`$1https://github.com/brogers5/chocolatey-package-$($Latest.PackageName)/tree/v$($Latest.Version)`$2"
+            '(\<releaseNotes\>).*?(\</releaseNotes\>)'       = "`${1}$($Latest.ReleaseNotes)`$2"
+            '(<copyright>)[^<]*(</copyright>)'               = "`$1© $(Get-Date -Format yyyy) SplitmediaLabs, Ltd. All Rights Reserved.`$2"
         }
     }
 }
@@ -113,7 +113,7 @@ function global:au_GetLatest {
         Stable = Get-LatestPublicReleaseInfo
     }
 
-    $m = 47;
+    $m = 47
     while ($true) {
         $keyName = "m$m"
         try {
@@ -123,7 +123,7 @@ function global:au_GetLatest {
         catch {
             if ($_.Exception.Message -eq "$keyName is not a valid release ID!") {
                 #We're done enumerating releases.
-                break;
+                break
             }
             else {
                 #Rethrow original exception
