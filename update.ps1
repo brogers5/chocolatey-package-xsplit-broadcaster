@@ -135,19 +135,4 @@ function global:au_GetLatest {
     return @{ Streams = $streams }
 }
 
-$releaseData = Get-LatestPublicReleaseData
-$latestPublishedVersion = $releaseData.Version
-
-$currentPath = (Split-Path $MyInvocation.MyCommand.Definition)
-$installScriptPath = Join-Path -Path $currentPath -ChildPath 'tools' | Join-Path -ChildPath 'chocolateyInstall.ps1'
-$localVersion = (Select-String -Path $installScriptPath -Pattern "(^^\[version\] [$]softwareVersion\s*=\s*)'(.*)'").Matches.Groups[2].Value
-
-if ($latestPublishedVersion -lt $localVersion) {
-    Write-Warning "Local version (v$localVersion) is newer than latest published version (v$latestPublishedVersion)"
-    Write-Warning "v$localVersion may have been unlisted - skipping URL check due to avoid directory-related errors"
-
-    Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme -NoCheckUrl
-}
-else {
-    Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme
-}
+Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme
