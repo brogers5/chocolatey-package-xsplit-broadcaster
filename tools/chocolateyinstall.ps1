@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'
 
-Confirm-Win10 14393
+Confirm-Win10 -ReqBuild 14393
 
 $toolsDir = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
 . $toolsDir\helpers.ps1
