@@ -21,10 +21,6 @@ function global:au_BeforeUpdate ($Package) {
     Set-DescriptionFromReadme -Package $Package -ReadmePath $readmePath
 }
 
-function global:au_AfterUpdate ($Package) {
-
-}
-
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
