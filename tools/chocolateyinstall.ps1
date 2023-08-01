@@ -2,7 +2,7 @@
 
 Confirm-Win10 14393
 
-$toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+$toolsDir = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
 . $toolsDir\helpers.ps1
 
 $softwareName = 'XSplit Broadcaster'
@@ -11,7 +11,7 @@ $currentVersion = Get-CurrentVersion
 
 if ($currentVersion -and $currentVersion -eq $softwareVersion -and !$env:ChocolateyForce) {
   Write-Output "$softwareName v$softwareVersion is already installed."
-  Write-Output "Skipping download and execution of installer."
+  Write-Output 'Skipping download and execution of installer.'
 }
 else {
   if (Get-PendingReboot) {

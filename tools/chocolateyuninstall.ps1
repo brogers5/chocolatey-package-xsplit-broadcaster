@@ -4,7 +4,7 @@ $packageArgs = @{
   packageName    = $env:ChocolateyPackageName
   softwareName   = 'XSplit Broadcaster'
   fileType       = 'MSI'
-  silentArgs     = "/qn /norestart"
+  silentArgs     = '/qn /norestart'
   validExitCodes = @(0, 3010, 1605, 1614, 1641)
 }
 
@@ -21,7 +21,7 @@ elseif ($key.Count -eq 0) {
 }
 elseif ($key.Count -gt 1) {
   Write-Warning "$($key.Count) matches found!"
-  Write-Warning "To prevent accidental data loss, no programs will be uninstalled."
-  Write-Warning "Please alert package maintainer the following keys were matched:"
+  Write-Warning 'To prevent accidental data loss, no programs will be uninstalled.'
+  Write-Warning 'Please alert package maintainer the following keys were matched:'
   $key | ForEach-Object { Write-Warning "- $($_.DisplayName)" }
 }
