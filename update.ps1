@@ -5,6 +5,12 @@ Import-Module au
 $userAgent = "Update checker of Chocolatey Community Package 'xsplit-broadcaster'"
 
 function global:au_BeforeUpdate ($Package) {
+    $streamName = $Latest.Stream
+    $stableVersion = [version] $Package.Streams['Stable']['NuspecVersion']
+    if ($streamName -ne 'Stable' -and $Latest.SoftwareVersion.Version -eq $stableVersion) {
+        throw "Latest $($Latest.Stream) build now points to the latest Stable build, but does not need a new package!"
+    }
+
     #Archive this version for future development, since the vendor does not guarantee perpetual availability
     $filePath = ".\XSplit_Broadcaster_$($Latest.Version).exe"
     Invoke-WebRequest -Uri $Latest.URL64 -OutFile $filePath
@@ -131,4 +137,23 @@ function global:au_GetLatest {
     return @{ Streams = $streams }
 }
 
-Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme
+try {
+    Update-Package -ChecksumFor None -IncludeStream $IncludeStream -NoReadme
+}
+catch {
+    $ignore = 'build now points to the latest Stable build, but does not need a new package!'
+    if ($_ -match $ignore) {
+        $streamVersionsFilePath = ".\$($Latest.PackageName).json"
+
+        #Silently update this stream's version, so we can effectively ignore it going forward
+        $streams = Get-Content -Path $streamVersionsFilePath -Raw | ConvertFrom-Json
+        $currentStreamName = $Latest.Stream
+        $streams.$($currentStreamName) = $Latest.Version
+        $streams | ConvertTo-Json | Set-Content -Path $streamVersionsFilePath
+
+        Write-Warning $_ ; 'ignore'
+    }
+    else { 
+        throw $_
+    }
+}
