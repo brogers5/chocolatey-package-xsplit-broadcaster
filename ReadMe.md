@@ -1,7 +1,7 @@
 ﻿# <img src="https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png" width="48" height="48"/> Chocolatey Package: [XSplit Broadcaster](https://community.chocolatey.org/packages/xsplit-broadcaster)
 
-[![Chocolatey package version](https://img.shields.io/chocolatey/v/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster)
-[![Chocolatey package download count](https://img.shields.io/chocolatey/dt/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster)
+[![Latest package version shield](https://img.shields.io/chocolatey/v/xsplit-broadcaster.svg?include_prereleases)](https://community.chocolatey.org/packages/xsplit-broadcaster)
+[![Total package download count shield](https://img.shields.io/chocolatey/dt/xsplit-broadcaster.svg)](https://community.chocolatey.org/packages/xsplit-broadcaster)
 
 ## Install
 
@@ -17,6 +17,8 @@ Alternatively, the packages as published on the Chocolatey Community Repository 
 choco install xsplit-broadcaster --source="'.;https://community.chocolatey.org/api/v2/'"
 ```
 
+This package also supports the project's internal builds. Opt into these with the `--prerelease` switch.
+
 ## Build
 
 [Install Chocolatey](https://chocolatey.org/install), clone this repository, and run the following command in the cloned repository:
@@ -25,9 +27,13 @@ choco install xsplit-broadcaster --source="'.;https://community.chocolatey.org/a
 choco pack
 ```
 
-A successful build will create `xsplit-broadcaster.w.x.y.z.nupkg`, where `w.x.y.z` should be the Nuspec's `version` value at build time.
+A successful build will create `xsplit-broadcaster.w.x.y.z.nupkg`, where `w.x.y.z` should be the Nuspec's normalized `version` value at build time.
 
-Note that Chocolatey package builds are non-deterministic. Consequently, an independently built package will fail a checksum validation against officially published packages.
+>**Note**
+>As of Chocolatey v2.0.0, [leading zeros will no longer be used/honored within version numbers](https://github.com/chocolatey/choco/issues/1174). Legacy package versions that contain these will be normalized to remove them from the resulting filename. Going forward, `version` will be normalized accordingly for behavior consistency between v1 and v2 Chocolatey releases.
+
+>**Note**
+>Chocolatey package builds are non-deterministic. Consequently, an independently built package's checksum will not match that of the officially published package.
 
 ## Update
 
@@ -45,7 +51,7 @@ Alternatively, a junction point can be created that points to the local reposito
 mklink /J xsplit-broadcaster ..\chocolatey-package-xsplit-broadcaster
 ```
 
-Once created, simply run `update.ps1` from within the created directory/junction point. Assuming all goes well, all relevant files should change to reflect the latest version available for the last stream that was built. This will also build a new package version using the modified files.
+Once created, simply run `update.ps1` from within the created directory/junction point. Assuming all goes well, all relevant files should change to reflect the latest version available. This will also build a new package version using the modified files.
 
 To limit the scope of update checks to a specific update channel, pass the `-IncludeStream` parameter with the desired Stream name:
 
@@ -54,7 +60,7 @@ To limit the scope of update checks to a specific update channel, pass the `-Inc
 ```
 
 ```powershell
-.\update.ps1 -IncludeStream 'm50'
+.\update.ps1 -IncludeStream 'm51'
 ```
 
-Before submitting a pull request, please [test the package](https://docs.chocolatey.org/en-us/community-repository/moderation/package-verifier#steps-for-each-package) with a 64-bit Windows 10 v1607+ environment similar to the [Chocolatey Testing Environment](https://github.com/chocolatey-community/chocolatey-test-environment) first.
+Before submitting a pull request, please [test the package](https://docs.chocolatey.org/en-us/community-repository/moderation/package-verifier#steps-for-each-package) using the latest [Chocolatey Testing Environment](https://github.com/chocolatey-community/chocolatey-test-environment) first.
