@@ -83,11 +83,12 @@ function Get-OfflineInstallerUri([uri] $WebInstallerUri) {
 function Get-LatestInternalReleaseInfo($M) {
     $canonicalUri = "https://xspl.it/bc/$M/latest"
     $response = Invoke-WebRequest -Uri $canonicalUri -UserAgent $userAgent -MaximumRedirection 0 -SkipHttpErrorCheck -UseBasicParsing -ErrorAction SilentlyContinue
-    
-    $redirectedUri = $response.Headers['Location'][0]
-    if ($redirectedUri -eq 'https://www.xsplit.com/') {
+
+    if ($response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound) {
         throw "$M is not a valid release ID!"
     }
+    
+    $redirectedUri = $response.Headers['Location'][0]
     $version = Get-Version -Version $redirectedUri
 
     return @{
