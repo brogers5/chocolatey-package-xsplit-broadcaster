@@ -29,10 +29,10 @@ choco pack
 
 A successful build will create `xsplit-broadcaster.w.x.y.z.nupkg`, where `w.x.y.z` should be the Nuspec's normalized `version` value at build time.
 
->**Note**
+>[!Note]
 >As of Chocolatey v2.0.0, [leading zeros will no longer be used/honored within version numbers](https://github.com/chocolatey/choco/issues/1174). Legacy package versions that contain these will be normalized to remove them from the resulting filename. Going forward, `version` will be normalized accordingly for behavior consistency between v1 and v2 Chocolatey releases.
 
->**Note**
+>[!Note]
 >Chocolatey package builds are non-deterministic. Consequently, an independently built package's checksum will not match that of the officially published package.
 
 ## Update
