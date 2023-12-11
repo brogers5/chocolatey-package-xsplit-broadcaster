@@ -9,7 +9,7 @@ $softwareName = 'XSplit Broadcaster'
 [version] $softwareVersion = '4.5.2311.2106'
 $currentVersion = Get-CurrentVersion
 
-if ($currentVersion -and $currentVersion -eq $softwareVersion -and !$env:ChocolateyForce) {
+if ($currentVersion -eq $softwareVersion -and !$env:ChocolateyForce) {
   Write-Output "$softwareName v$softwareVersion is already installed."
   Write-Output 'Skipping download and execution of installer.'
 }
