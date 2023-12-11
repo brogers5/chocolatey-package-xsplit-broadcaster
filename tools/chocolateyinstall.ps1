@@ -20,6 +20,11 @@ else {
          $softwareName may fail to install."
   }
 
+  if ($currentVersion -gt $softwareVersion) {
+    Write-Output "Current installed version (v$currentVersion) must be uninstalled first..."
+    Uninstall-CurrentVersion
+  }
+
   $logFilePathPrefix = "$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion)"
 
   $packageArgs = @{
