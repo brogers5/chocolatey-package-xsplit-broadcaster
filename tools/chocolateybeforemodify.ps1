@@ -1,24 +1,31 @@
 ﻿$ErrorActionPreference = 'Stop'
 
-$processName = 'XSplit.Core'
-$process = Get-Process -Name $processName -ErrorAction SilentlyContinue
+$softwareName = 'XSplit Broadcaster'
+$installLocation = Get-AppInstallLocation -AppNamePattern $softwareName
 
-if ($process) {
-    $softwareName = 'XSplit Broadcaster'
+if ($null -ne $installLocation) {
+    $installLocationPattern = "$([regex]::Escape($installLocation)).*"
 
-    Write-Warning "$softwareName is currently running, stopping it to prevent upgrade/uninstall from blocking..."
-    Stop-Process -InputObject $process -ErrorAction SilentlyContinue
-
-    Start-Sleep -Seconds 3
-
-    $process = Get-Process -Name $processName -ErrorAction SilentlyContinue
-    if ($process) {
-        Write-Warning "$softwareName is still running despite stop request, force stopping it..."
-        Stop-Process -InputObject $process -Force -ErrorAction SilentlyContinue
+    $processes = Get-Process
+    $detectedProcesses = New-Object Collections.Generic.List[PSObject]
+    foreach ($process in $processes) {
+        if ($process.Path -match $installLocationPattern) {
+            $detectedProcesses.Add($process)
+        }
     }
-
-    Write-Warning "If upgrading, $softwareName may need to be manually restarted upon completion"
+    
+    if ($detectedProcesses.Count -gt 0) {
+        Write-Warning "$softwareName is currently running, stopping it to prevent upgrade/uninstall from blocking..."
+        Write-Warning 'The following processes were detected and will be stopped:'
+    
+        foreach ($process in $detectedProcesses) {
+            Write-Warning "  - $($process.ProcessName) (PID: $($process.Id))"
+        }
+    
+        Remove-Process -PathFilter $installLocationPattern | Out-Null
+    }
 }
 else {
-    Write-Debug "No running $processName process instances were found"
+    Write-Warning "Could not detect install location of $softwareName"
+    Write-Warning 'If any related processes are running, they may need to be manually closed for upgrade/uninstall to proceed'
 }
