@@ -10,6 +10,13 @@ function global:au_BeforeUpdate ($Package) {
     if ($streamName -ne 'Stable' -and $Latest.SoftwareVersion.Version -eq $stableVersion) {
         throw "Latest $($Latest.Stream) build now points to the latest Stable build, but does not need a new package!"
     }
+    
+    if ((Get-Command -Name 'vt' -CommandType Application -ErrorAction SilentlyContinue)) {
+        vt.exe scan url "$($Latest.URL64)" --silent
+    }
+    else {
+        Write-Warning 'VirusTotal CLI is not available - skipping VirusTotal submission'
+    }
 
     #Archive this version for future development, since the vendor does not guarantee perpetual availability
     $filePath = ".\XSplit_Broadcaster_$($Latest.Version).exe"
