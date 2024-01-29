@@ -82,6 +82,10 @@ function Get-OfflineInstallerUri([uri] $WebInstallerUri) {
             Invoke-WebRequest -Uri $differentDirectoryUri -Method Head -UserAgent $userAgent | Out-Null
             $returnedUri = $differentDirectoryUri
         }
+        else {
+            #Rethrow original exception
+            throw
+        }
     }
 
     return $returnedUri
