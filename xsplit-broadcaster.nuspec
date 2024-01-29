@@ -3,14 +3,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>xsplit-broadcaster</id>
-    <version>4.5.2311.2108-internal</version>
-    <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.5.2311.2108-internal</packageSourceUrl>
+    <version>4.5.2311.2109-internal</version>
+    <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.5.2311.2109-internal</packageSourceUrl>
     <owners>sublym0nal</owners>
     <title>XSplit Broadcaster</title>
     <authors>SplitmediaLabs Ltd.</authors>
     <projectUrl>https://www.xsplit.com/broadcaster</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/brogers5/chocolatey-package-xsplit-broadcaster@e68e6db6b26c789efde0af0d5cb368a9212770e0/xsplit-broadcaster.png</iconUrl>
-    <copyright>© 2023 SplitmediaLabs, Ltd. All Rights Reserved.</copyright>
+    <copyright>© 2024 SplitmediaLabs, Ltd. All Rights Reserved.</copyright>
     <licenseUrl>https://www.xsplit.com/terms-and-conditions</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <docsUrl>https://support.xsplit.com/en/category/xsplit-broadcaster-1el49gp/</docsUrl>
@@ -34,7 +34,7 @@ XSplit Broadcaster, the best all-in-one streaming and recording application for 
 
 ---
 
-## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.5.2311.2108-internal/PACKAGE-NOTES.md)
+## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.5.2311.2109-internal/PACKAGE-NOTES.md)
 ]]></description>
     <releaseNotes></releaseNotes>
     <dependencies>
