@@ -1,12 +1,3 @@
-
----
-
-### [choco://xsplit-broadcaster](choco://xsplit-broadcaster)
-
-To use choco:// protocol URLs, install [(unofficial) choco:// Protocol support](https://community.chocolatey.org/packages/choco-protocol-support)
-
----
-
 ### Powerful Live streaming and recording studio that offers limitless customization
 
 XSplit Broadcaster, the best all-in-one streaming and recording application for content creation, powers the biggest events in gaming, esports and more.
