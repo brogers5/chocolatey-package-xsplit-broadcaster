@@ -6,7 +6,7 @@ $toolsDir = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
 . $toolsDir\helpers.ps1
 
 $softwareName = 'XSplit Broadcaster'
-[version] $softwareVersion = '4.5.2402.1501'
+[version] $softwareVersion = '4.5.2402.2301'
 $currentVersion = Get-CurrentVersion
 
 if ($currentVersion -eq $softwareVersion -and !$env:ChocolateyForce) {
@@ -31,8 +31,8 @@ else {
     packageName    = $env:ChocolateyPackageName
     softwareName   = $softwareName
     fileType       = 'EXE'
-    url64bit       = 'https://cdn2.xsplit.com/download/bc/m52/4.5.2402.1501/XSplit_Broadcaster_4.5.2402.1501.exe'
-    checksum64     = '2a52683e0c8fc23c5498b67d1e38c1da5dbf134ccdaade240d275374533053d4'
+    url64bit       = 'https://cdn2.xsplit.com/download/bc/m52/4.5.2402.2301/XSplit_Broadcaster_4.5.2402.2301.exe'
+    checksum64     = '2cb93fdf89e804980c4285f3b9253e80dd1ab1e72868599211e05c745e85fb42'
     checksumType64 = 'sha256'
     silentArgs     = "/exenoui /noprereqs /exelog `"$logFilePathPrefix.ExeInstall.log`" /qn /norestart /l*v `"$logFilePathPrefix.MsiInstall.log`""
     validExitCodes = @(0, 3010, 1641)
