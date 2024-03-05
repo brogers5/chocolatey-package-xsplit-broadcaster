@@ -74,7 +74,7 @@ To limit the scope of update checks to a specific update channel, pass the `-Inc
 ```
 
 ```powershell
-.\update.ps1 -IncludeStream 'm52'
+.\update.ps1 -IncludeStream 'm53'
 ```
 
 Before submitting a pull request, please [test the package](https://docs.chocolatey.org/en-us/community-repository/moderation/package-verifier#steps-for-each-package) using the latest [Chocolatey Testing Environment](https://github.com/chocolatey-community/chocolatey-test-environment) first.
