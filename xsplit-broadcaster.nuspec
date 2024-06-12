@@ -3,8 +3,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>xsplit-broadcaster</id>
-    <version>4.5.2405.1811</version>
-    <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.5.2405.1811</packageSourceUrl>
+    <version>4.5.2406.1101-internal</version>
+    <packageSourceUrl>https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/tree/v4.5.2406.1101-internal</packageSourceUrl>
     <owners>sublym0nal</owners>
     <title>XSplit Broadcaster</title>
     <authors>SplitmediaLabs Ltd.</authors>
@@ -25,9 +25,9 @@ XSplit Broadcaster, the best all-in-one streaming and recording application for 
 
 ---
 
-## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.5.2405.1811/PACKAGE-NOTES.md)
+## [Package Notes](https://github.com/brogers5/chocolatey-package-xsplit-broadcaster/blob/v4.5.2406.1101-internal/PACKAGE-NOTES.md)
 ]]></description>
-    <releaseNotes>https://docs.google.com/document/d/e/2PACX-1vRl7A7gmqlaW7CF-r-EZ00l5ouD-CCVO7X-PSLg1cgtjfa0YssmJyvraM7jkfNXJMB5ZPdcaFZSZ6ER/pub</releaseNotes>
+    <releaseNotes></releaseNotes>
     <dependencies>
       <dependency id="chocolatey-os-dependency.extension" version="0.0.1" />
       <dependency id="chocolatey-fastanswers.extension" version="0.0.1" />
