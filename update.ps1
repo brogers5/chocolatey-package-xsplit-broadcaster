@@ -112,7 +112,9 @@ function Get-LatestInternalReleaseInfo($M) {
 
 function Get-LatestPublicReleaseInfo {
     $releaseData = Get-LatestPublicReleaseData
-    $version = $releaseData.version
+
+    #Normalize version string to remove any leading zeros
+    $version = Get-Version -Version $releaseData.version
 
     return @{
         ReleaseNotes    = $releaseData.release_notes_url
