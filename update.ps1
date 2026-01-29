@@ -125,9 +125,7 @@ function Get-LatestPublicReleaseInfo {
 }
 
 function global:au_GetLatest {
-    $streams = [ordered] @{
-        Stable = Get-LatestPublicReleaseInfo
-    }
+    $streams = [ordered] @{}
 
     $m = 47
     while ($true) {
@@ -147,6 +145,8 @@ function global:au_GetLatest {
             }
         }
     }
+
+    $streams.Add('Stable', (Get-LatestPublicReleaseInfo))
 
     return @{ Streams = $streams }
 }
