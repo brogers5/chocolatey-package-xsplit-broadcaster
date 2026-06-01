@@ -49,14 +49,6 @@ function global:au_SearchReplace {
     }
 }
 
-function Get-LatestPublicReleaseData {
-    $canonicalUri = 'https://www.xsplit.com/api/service/download?page_size=10&application_id=1&active=1&release=0&platform=windows&installer_type=exe'
-
-    $response = Invoke-RestMethod -Uri $canonicalUri -UserAgent $userAgent -UseBasicParsing
-
-    return $response.data[0]
-}
-
 function Get-OfflineInstallerUri([uri] $WebInstallerUri) {
     #The package uses the offline installer, but SplitMediaLabs only publishes the web installer's URI.
     #This is only publicly shared via the web installer, and exposed as an alternate location in the installer.
@@ -91,51 +83,56 @@ function Get-OfflineInstallerUri([uri] $WebInstallerUri) {
     return $returnedUri
 }
 
-function Get-LatestInternalReleaseInfo($M) {
-    $canonicalUri = "https://xspl.it/bc/$M/latest"
-    $response = Invoke-WebRequest -Uri $canonicalUri -UserAgent $userAgent -MaximumRedirection 0 -SkipHttpErrorCheck -UseBasicParsing -ErrorAction SilentlyContinue
+function Get-LatestVersionResponse([string] $Uri) {
+    return Invoke-WebRequest -Uri $Uri -UserAgent $userAgent -MaximumRedirection 0 -SkipHttpErrorCheck -UseBasicParsing -ErrorAction SilentlyContinue
+}
 
+function Get-ReleaseDataFromUriResponse($Response) {
+    $redirectedUri = $Response.Headers['Location'][0]
+    
+    return @{
+        RedirectedUri = $redirectedUri
+        Version       = Get-Version -Version $redirectedUri
+    }
+}
+
+function Get-LatestInternalReleaseInfo($M) {
+    $response = Get-LatestVersionResponse -Uri "https://xspl.it/bc/$M/latest"
     if ($response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound) {
         throw "$M is not a valid release ID!"
     }
     
-    $redirectedUri = $response.Headers['Location'][0]
-    $version = Get-Version -Version $redirectedUri
+    $releaseData = Get-ReleaseDataFromUriResponse -Response $response
 
     return @{
         ReleaseNotes    = '' #Internal releases are not publicly documented
-        SoftwareVersion = $version
-        URL64           = Get-OfflineInstallerUri -WebInstallerUri $redirectedUri
-        Version         = "$version-internal" #This may change if building a package fix version
+        SoftwareVersion = $releaseData.Version
+        URL64           = Get-OfflineInstallerUri -WebInstallerUri $releaseData.RedirectedUri
+        Version         = "$($releaseData.Version)-internal" #This may change if building a package fix version
     }
 }
 
 function Get-LatestBetaReleaseInfo {
-    $canonicalUri = 'https://xspl.it/bc/beta'
-    $response = Invoke-WebRequest -Uri $canonicalUri -UserAgent $userAgent -MaximumRedirection 0 -SkipHttpErrorCheck -UseBasicParsing -ErrorAction SilentlyContinue
-    
-    $redirectedUri = $response.Headers['Location'][0]
-    $version = Get-Version -Version $redirectedUri
+    $response = Get-LatestVersionResponse -Uri 'https://xspl.it/bc/beta'
+    $releaseData = Get-ReleaseDataFromUriResponse -Response $response
 
     return @{
         ReleaseNotes    = '' #Beta releases are not publicly documented
-        SoftwareVersion = $version
-        URL64           = $redirectedUri
-        Version         = "$version-beta" #This may change if building a package fix version
+        SoftwareVersion = $releaseData.Version
+        URL64           = $releaseData.RedirectedUri
+        Version         = "$($releaseData.Version)-beta" #This may change if building a package fix version
     }
 }
 
 function Get-LatestPublicReleaseInfo {
-    $releaseData = Get-LatestPublicReleaseData
-
-    #Normalize version string to remove any leading zeros
-    $version = Get-Version -Version $releaseData.version
+    $response = Get-LatestVersionResponse -Uri 'https://xspl.it/download'
+    $releaseData = Get-ReleaseDataFromUriResponse -Response $response
 
     return @{
-        ReleaseNotes    = $releaseData.release_notes_url
-        SoftwareVersion = $version
-        URL64           = Get-OfflineInstallerUri -WebInstallerUri $releaseData.download_url
-        Version         = $version #This may change if building a package fix version
+        ReleaseNotes    = "https://xspl.it/bc/relnotes/$($releaseData.Version)"
+        SoftwareVersion = $releaseData.Version
+        URL64           = $releaseData.RedirectedUri
+        Version         = $releaseData.Version #This may change if building a package fix version
     }
 }
 
