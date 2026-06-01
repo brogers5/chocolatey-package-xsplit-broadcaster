@@ -110,6 +110,21 @@ function Get-LatestInternalReleaseInfo($M) {
     }
 }
 
+function Get-LatestBetaReleaseInfo {
+    $canonicalUri = 'https://xspl.it/bc/beta'
+    $response = Invoke-WebRequest -Uri $canonicalUri -UserAgent $userAgent -MaximumRedirection 0 -SkipHttpErrorCheck -UseBasicParsing -ErrorAction SilentlyContinue
+    
+    $redirectedUri = $response.Headers['Location'][0]
+    $version = Get-Version -Version $redirectedUri
+
+    return @{
+        ReleaseNotes    = '' #Beta releases are not publicly documented
+        SoftwareVersion = $version
+        URL64           = $redirectedUri
+        Version         = "$version-beta" #This may change if building a package fix version
+    }
+}
+
 function Get-LatestPublicReleaseInfo {
     $releaseData = Get-LatestPublicReleaseData
 
@@ -146,6 +161,7 @@ function global:au_GetLatest {
         }
     }
 
+    $streams.Add('Beta', (Get-LatestBetaReleaseInfo))
     $streams.Add('Stable', (Get-LatestPublicReleaseInfo))
 
     return @{ Streams = $streams }
