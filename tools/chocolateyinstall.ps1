@@ -31,7 +31,7 @@ else {
     packageName    = $env:ChocolateyPackageName
     softwareName   = $softwareName
     fileType       = 'EXE'
-    url64bit       = 'https://cdn.xsplit.com/download/bc/m54/4.6.2605.2109/XSplit_Broadcaster_4.6.2605.2109.exe'
+    url64bit       = 'https://cdn.xsplit.com/download/bc/m54/4.6.2605.2109/XSplit_Broadcaster_4.6.2605.2109-xsolla.exe'
     checksum64     = 'ea9d40aa0953c3cab56dade42ea4446c3f82906e265b7ff3addea2a41a3c6677'
     checksumType64 = 'sha256'
     silentArgs     = "/exenoui /noprereqs /exelog `"$logFilePathPrefix.ExeInstall.log`" /qn /norestart /l*v `"$logFilePathPrefix.MsiInstall.log`""
